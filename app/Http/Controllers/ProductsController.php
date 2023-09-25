@@ -28,7 +28,7 @@ class ProductsController extends Controller
 
         $categories = array_keys($productsByCategory);
 
-        $products = $productsByCategory[$category] ;
+        $products = $productsByCategory[$category] ?? null;
 
         return view('products')
             ->with('products', $products)
