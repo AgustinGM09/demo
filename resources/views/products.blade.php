@@ -11,7 +11,7 @@
         @if ($products)
             <ul>
                 @foreach ($products as $product)
-                    <li>{{ $product }}</li>
+                    <li>{{ $product->name }}</li>
                 @endforeach
             </ul>
         @else
@@ -22,7 +22,7 @@
     <p>Choose a category:</p>
     <ul>
         @foreach ($categories as $category)
-            <li><a href='/products/{{ $category }}'>{{ $category }}</a></li>
+            <li><a href='/products/{{ $category->name }}'>{{ $category->name }}</a></li>
         @endforeach
     </ul>
 

@@ -3,32 +3,24 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Category;
+use App\Models\Product;
 
 class ProductsController extends Controller
 {
     public function showProductsByCategory($category = null)
     {
-        $productsByCategory = [
-            'health' => [
-                'Band-Aids',
-                'Johnson’s Baby Powder',
-                'Tylenol'
-            ],
-            'tech' => [
-                'GoPro Action Camera',
-                'FitBit Fitness Watch',
-                'Nintendo Switch'
-            ],
-            'books' => [
-                'The Martian',
-                'The Great Gatsby',
-                'Joy Luck Club'
-            ]
-        ];
+        # Collection -> Category, Category, Category
+        $categories = Category::all();
 
-        $categories = array_keys($productsByCategory);
+        dd($categories);
 
-        $products = $productsByCategory[$category] ?? null;
+        $products = null;
+        
+        if($category) {
+            $category_id = $categories->firstWhere('name', $category)->id;
+            $products = Product::where('category_id', $category_id)->get();
+        }
 
         return view('products')
             ->with('products', $products)
